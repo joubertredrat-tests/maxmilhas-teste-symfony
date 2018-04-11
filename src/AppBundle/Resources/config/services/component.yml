@@ -1,0 +1,5 @@
+services:
+    app.component.api_request:
+        class: AppBundle\Component\ApiRequest
+        arguments:
+            - "@request_stack"

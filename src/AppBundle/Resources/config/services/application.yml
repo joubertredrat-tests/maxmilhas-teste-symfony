@@ -1,0 +1,5 @@
+services:
+    app.service.cpf_blacklist:
+        class: Application\Domain\Service\CpfBlacklistService
+        arguments:
+            - "@app.repository.cpf_blacklist"
