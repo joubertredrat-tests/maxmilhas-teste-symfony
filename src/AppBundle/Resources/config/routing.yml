@@ -42,3 +42,8 @@ api_cpf_delete:
     path: /api/v1/cpf/blacklist/{id}
     controller: AppBundle:CpfBlacklist:delete
     methods: [DELETE]
+
+form_show:
+    path: /form
+    controller: AppBundle:Form:show
+    methods: [GET]
