@@ -31,8 +31,19 @@ interface CpfBlacklistEventRepositoryInterface
     public function get(int $id): ?CpfBlacklistEventInterface;
 
     /**
-     * @param null|string $number
+     * @param string|null $sort
+     * @param string|null $number
+     * @param string|null $type
+     * @return array<CpfBlacklistEventInterface>
+     */
+    public function list(
+        ?string $sort = null,
+        ?string $number = null,
+        ?string $type = null
+    ): array;
+
+    /**
      * @return array
      */
-    public function list(?string $number = null): array;
+    public function countByEvents(): array;
 }

@@ -1,3 +1,18 @@
+api_status:
+    path: /api/v1/status
+    controller: AppBundle:Status:show
+    methods: [GET]
+
+api_status_alias:
+    path: /status
+    controller: AppBundle:Status:show
+    methods: [GET]
+
+api_cpf_events_list:
+    path: /api/v1/cpf/blacklist/events
+    controller: AppBundle:CpfBlacklistEvent:list
+    methods: [GET]
+
 api_cpf_consult:
     path: /api/v1/cpf/blacklist/consulta
     controller: AppBundle:CpfBlacklist:consult

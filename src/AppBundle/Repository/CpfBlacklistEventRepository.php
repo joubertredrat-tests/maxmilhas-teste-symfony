@@ -48,8 +48,49 @@ class CpfBlacklistEventRepository extends EntityRepository implements
     /**
      * {@inheritdoc}
      */
-    public function list(?string $number = null): array
+    public function list(
+        ?string $sort = null,
+        ?string $number = null,
+        ?string $type = null
+    ): array {
+        $queryBuilder = $this->createQueryBuilder('e');
+
+        if ($number) {
+            $queryBuilder
+                ->where('e.number = :number')
+                ->setParameter('number', $number)
+            ;
+        }
+
+        if ($type) {
+            $queryBuilder
+                ->where('e.type = :type')
+                ->setParameter('type', $type)
+            ;
+        }
+
+        if ($sort) {
+            $queryBuilder->orderBy('e.id', $sort);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByEvents(): array
     {
-        return $this->findAll();
+        $queryBuilder = $this->createQueryBuilder('e');
+
+        return $queryBuilder
+            ->select('e.type', 'COUNT(e.id) AS total')
+            ->groupBy('e.type')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }

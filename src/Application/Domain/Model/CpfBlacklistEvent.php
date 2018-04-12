@@ -58,7 +58,7 @@ class CpfBlacklistEvent implements CpfBlacklistEventInterface
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getType(): ?string
     {
@@ -66,8 +66,7 @@ class CpfBlacklistEvent implements CpfBlacklistEventInterface
     }
 
     /**
-     * @param string $type
-     * @return void
+     * {@inheritdoc}
      * @throws \ReflectionException
      */
     public function setType(string $type): void
@@ -81,7 +80,7 @@ class CpfBlacklistEvent implements CpfBlacklistEventInterface
      * {@inheritdoc}
      * @throws \ReflectionException
      */
-    public function getEventTypesAvailable(): array
+    public static function getEventTypesAvailable(): array
     {
         $reflection = new \ReflectionClass(self::class);
 
@@ -92,7 +91,7 @@ class CpfBlacklistEvent implements CpfBlacklistEventInterface
      * {@inheritdoc}
      * @throws \ReflectionException
      */
-    public function isValidEventType(?string $type): bool
+    public static function isValidEventType(?string $type): bool
     {
         return in_array($type, self::getEventTypesAvailable());
     }

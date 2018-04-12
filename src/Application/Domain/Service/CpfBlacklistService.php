@@ -206,4 +206,15 @@ class CpfBlacklistService
 
         return $cpfBlacklist;
     }
+
+    /**
+     * @return int
+     */
+    public function getCpfBlacklistCount(): int
+    {
+        return $this
+            ->cpfBlacklistRepository
+            ->countBlacklist()
+        ;
+    }
 }

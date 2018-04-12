@@ -92,4 +92,20 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
     {
         return $this->findAll();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countBlacklist(): int
+    {
+        $queryBuilder = $this->createQueryBuilder('b');
+
+        $data = $queryBuilder
+            ->select('COUNT(b.id) AS total')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return (int) $data[0]['total'];
+    }
 }

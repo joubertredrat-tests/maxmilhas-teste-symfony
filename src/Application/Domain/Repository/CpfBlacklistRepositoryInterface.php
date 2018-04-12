@@ -50,4 +50,9 @@ interface CpfBlacklistRepositoryInterface
      * @return array<CpfBlacklistInterface>
      */
     public function list(): array;
+
+    /**
+     * @return int
+     */
+    public function countBlacklist(): int;
 }

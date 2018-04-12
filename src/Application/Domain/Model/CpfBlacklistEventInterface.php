@@ -22,6 +22,17 @@ interface CpfBlacklistEventInterface
     /**
      * @return string|null
      */
+    public function getType(): ?string;
+
+    /**
+     * @param string $type
+     * @return void
+     */
+    public function setType(string $type): void;
+
+    /**
+     * @return string|null
+     */
     public function getNumber(): ?string;
 
     /**
@@ -44,11 +55,11 @@ interface CpfBlacklistEventInterface
     /**
      * @return array
      */
-    public function getEventTypesAvailable(): array;
+    public static function getEventTypesAvailable(): array;
 
     /**
      * @param string|null $type
      * @return bool
      */
-    public function isValidEventType(?string $type): bool;
+    public static function isValidEventType(?string $type): bool;
 }

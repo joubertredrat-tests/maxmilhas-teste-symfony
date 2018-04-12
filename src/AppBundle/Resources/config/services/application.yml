@@ -8,3 +8,9 @@ services:
         class: Application\Domain\Service\CpfBlacklistEventService
         arguments:
             - "@app.repository.cpf_blacklist_event"
+
+    app.service.status:
+        class: Application\Domain\Service\StatusService
+        arguments:
+            - "@app.service.cpf_blacklist"
+            - "@app.service.cpf_blacklist_event"
