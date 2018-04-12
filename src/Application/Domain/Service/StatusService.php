@@ -6,6 +6,7 @@
  */
 
 namespace Application\Domain\Service;
+
 use AppBundle\Component\Status;
 
 /**

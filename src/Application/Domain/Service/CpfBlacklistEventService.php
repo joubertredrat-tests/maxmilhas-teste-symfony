@@ -128,8 +128,8 @@ class CpfBlacklistEventService
      * @return CpfBlacklistEventInterface
      */
     public function add(
-        CpfBlacklistEventInterface $cpfBlacklistEvent)
-    : CpfBlacklistEventInterface {
+        CpfBlacklistEventInterface $cpfBlacklistEvent
+    ): CpfBlacklistEventInterface {
         return $this
             ->cpfBlacklistEventRepository
             ->add($cpfBlacklistEvent)
