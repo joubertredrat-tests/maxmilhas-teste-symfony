@@ -26,13 +26,13 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function add(CpfBlacklistInterface $cpf): CpfBlacklistInterface
+    public function add(CpfBlacklistInterface $cpfBlacklist): CpfBlacklistInterface
     {
         $entityManager = $this->getEntityManager();
-        $entityManager->persist($cpf);
+        $entityManager->persist($cpfBlacklist);
         $entityManager->flush();
 
-        return $cpf;
+        return $cpfBlacklist;
     }
 
     /**
@@ -40,13 +40,13 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update(CpfBlacklistInterface $cpf): CpfBlacklistInterface
+    public function update(CpfBlacklistInterface $cpfBlacklist): CpfBlacklistInterface
     {
         $entityManager = $this->getEntityManager();
-        $entityManager->persist($cpf);
-        $entityManager->flush($cpf);
+        $entityManager->persist($cpfBlacklist);
+        $entityManager->flush($cpfBlacklist);
 
-        return $cpf;
+        return $cpfBlacklist;
     }
 
     /**
@@ -54,11 +54,11 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function delete(CpfBlacklistInterface $cpf): bool
+    public function delete(CpfBlacklistInterface $cpfBlacklist): bool
     {
         $entityManager = $this->getEntityManager();
-        $entityManager->remove($cpf);
-        $entityManager->flush($cpf);
+        $entityManager->remove($cpfBlacklist);
+        $entityManager->flush($cpfBlacklist);
 
         return true;
     }
@@ -68,10 +68,10 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
      */
     public function get(int $id): ?CpfBlacklistInterface
     {
-        /** @var CpfBlacklistInterface $cpf */
-        $cpf = $this->find($id);
+        /** @var CpfBlacklistInterface $cpfBlacklist */
+        $cpfBlacklist = $this->find($id);
 
-        return $cpf;
+        return $cpfBlacklist;
     }
 
     /**
@@ -79,9 +79,17 @@ class CpfBlacklistRepository extends EntityRepository implements CpfBlacklistRep
      */
     public function getByNumber(string $number): ?CpfBlacklistInterface
     {
-        /** @var CpfBlacklistInterface $cpf */
-        $cpf = $this->findOneBy(['number' => $number]);
+        /** @var CpfBlacklistInterface $cpfBlacklist */
+        $cpfBlacklist = $this->findOneBy(['number' => $number]);
 
-        return $cpf;
+        return $cpfBlacklist;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function list(): array
+    {
+        return $this->findAll();
     }
 }

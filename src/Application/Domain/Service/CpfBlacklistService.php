@@ -48,7 +48,7 @@ class CpfBlacklistService
     {
         return $this
             ->cpfBlacklistRepository
-            ->findAll()
+            ->list()
         ;
     }
 
@@ -116,18 +116,18 @@ class CpfBlacklistService
             );
         }
 
-        $cpfBlacklist = $this
+        $cpfBlacklistFound = $this
             ->cpfBlacklistRepository
             ->getByNumber($number)
         ;
 
-        if (!$cpfBlacklist instanceof CpfBlacklistInterface) {
+        if (!$cpfBlacklistFound instanceof CpfBlacklistInterface) {
             throw new CpfBlacklistNotFoundException(
                 sprintf('Cpf with number %s not found', $number)
             );
         }
 
-        return $cpfBlacklist;
+        return $cpfBlacklistFound;
     }
 
     /**
@@ -192,10 +192,10 @@ class CpfBlacklistService
 
     /**
      * @param int $id
-     * @return bool
+     * @return CpfBlacklistInterface
      * @throws CpfBlacklistNotFoundException
      */
-    public function deleteCpf(int $id): bool
+    public function deleteCpf(int $id): CpfBlacklistInterface
     {
         $cpfBlacklist = $this->getCpf($id);
 
@@ -204,6 +204,6 @@ class CpfBlacklistService
             ->delete($cpfBlacklist)
         ;
 
-        return true;
+        return $cpfBlacklist;
     }
 }

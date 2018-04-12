@@ -8,11 +8,11 @@
 namespace Application\Domain\Model;
 
 /**
- * Cpf Interface
+ * Cpf Blacklist Event Interface
  *
  * @package Application\Domain\Model
  */
-interface CpfBlacklistInterface
+interface CpfBlacklistEventInterface
 {
     /**
      * @return int|null
@@ -42,19 +42,13 @@ interface CpfBlacklistInterface
     public function setCreatedAt(\DateTime $createdAt): void;
 
     /**
-     * @return \DateTime|null
+     * @return array
      */
-    public function getUpdatedAt(): ?\DateTime;
+    public function getEventTypesAvailable(): array;
 
     /**
-     * @param \DateTime $updatedAt
-     * @return void
-     */
-    public function setUpdatedAt(\DateTime $updatedAt): void;
-
-    /**
-     * @param string|null $number
+     * @param string|null $type
      * @return bool
      */
-    public static function isValid(?string $number): bool;
+    public function isValidEventType(?string $type): bool;
 }

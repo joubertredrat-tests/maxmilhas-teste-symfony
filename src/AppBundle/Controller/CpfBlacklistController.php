@@ -12,6 +12,7 @@ use Application\Domain\Exception\Cpf\Blacklist\HasExistException as CpfBlacklist
 use Application\Domain\Exception\Cpf\Blacklist\NotFoundException as CpfBlacklistNotFoundException;
 use Application\Domain\Exception\Cpf\InvalidNumberException as CpfInvalidNumberException;
 use Application\Domain\Model\CpfBlacklist;
+use Application\Domain\Presenter\CpfBlacklistPresenter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,10 +41,18 @@ class CpfBlacklistController extends Controller
                 );
             }
 
-            $service = $this->get('app.service.cpf_blacklist');
-            $cpfPresenter = $service->getCpfByNumberApi($cpf);
+            $cpfBlacklistService = $this->get('app.service.cpf_blacklist');
+            $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
 
-            return new JsonResponse($cpfPresenter->toArray());
+            $cpfBlacklistConsult = new CpfBlacklist();
+            $cpfBlacklistConsult->setNumber($cpf);
+            $cpfBlacklistEventService->registerEventConsult($cpfBlacklistConsult);
+
+            $cpfBlacklistPresenter = $cpfBlacklistService->getCpfByNumberApi(
+                $cpfBlacklistConsult->getNumber()
+            );
+
+            return new JsonResponse($cpfBlacklistPresenter->toArray());
         } catch (CpfInvalidNumberException $e) {
             throw new HttpException(
                 Response::HTTP_BAD_REQUEST,
@@ -68,8 +77,11 @@ class CpfBlacklistController extends Controller
     public function listAction(): JsonResponse
     {
         try {
-            $service = $this->get('app.service.cpf_blacklist');
-            $apiListPresenter = $service->listCpfApi();
+            $cpfBlacklistService = $this->get('app.service.cpf_blacklist');
+            $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
+
+            $apiListPresenter = $cpfBlacklistService->listCpfApi();
+            $cpfBlacklistEventService->registerEventList();
 
             return new JsonResponse($apiListPresenter->toArray());
         } catch (\Throwable $e) {
@@ -87,10 +99,17 @@ class CpfBlacklistController extends Controller
     public function getAction(int $id): JsonResponse
     {
         try {
-            $service = $this->get('app.service.cpf_blacklist');
-            $cpfPresenter = $service->getCpfApi($id);
+            $cpfBlacklistService = $this->get('app.service.cpf_blacklist');
+            $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
 
-            return new JsonResponse($cpfPresenter->toArray());
+            /** @var CpfBlacklistPresenter $cpfBlacklistPresenter */
+            $cpfBlacklistPresenter = $cpfBlacklistService->getCpfApi($id);
+
+            $cpfBlacklistEventService->registerEventGet(
+                $cpfBlacklistPresenter->getCpfBlacklist()
+            );
+
+            return new JsonResponse($cpfBlacklistPresenter->toArray());
         } catch (CpfBlacklistNotFoundException $e) {
             throw new HttpException(
                 Response::HTTP_NOT_FOUND,
@@ -119,11 +138,18 @@ class CpfBlacklistController extends Controller
                 );
             }
 
-            $service = $this->get('app.service.cpf_blacklist');
-            $cpfPresenter = $service->addCpfApi($data['number']);
+            $cpfBlacklistService = $this->get('app.service.cpf_blacklist');
+            $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
+
+            /** @var CpfBlacklistPresenter $cpfBlacklistPresenter */
+            $cpfBlacklistPresenter = $cpfBlacklistService->addCpfApi($data['number']);
+
+            $cpfBlacklistEventService->registerEventAdd(
+                $cpfBlacklistPresenter->getCpfBlacklist()
+            );
 
             return new JsonResponse(
-                $cpfPresenter->toArray(),
+                $cpfBlacklistPresenter->toArray(),
                 Response::HTTP_CREATED
             );
         } catch (CpfInvalidNumberException|CpfBlacklistHasExistException $e) {
@@ -146,8 +172,12 @@ class CpfBlacklistController extends Controller
     public function deleteAction(int $id): JsonResponse
     {
         try {
-            $service = $this->get('app.service.cpf_blacklist');
-            $service->deleteCpf($id);
+            $cpfBlacklistService = $this->get('app.service.cpf_blacklist');
+            $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
+
+            $cpfBlacklist = $cpfBlacklistService->deleteCpf($id);
+
+            $cpfBlacklistEventService->registerEventDelete($cpfBlacklist);
 
             return new JsonResponse([], Response::HTTP_NO_CONTENT);
         } catch (CpfBlacklistNotFoundException $e) {

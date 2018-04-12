@@ -3,3 +3,8 @@ services:
         class: Application\Domain\Service\CpfBlacklistService
         arguments:
             - "@app.repository.cpf_blacklist"
+
+    app.service.cpf_blacklist_event:
+        class: Application\Domain\Service\CpfBlacklistEventService
+        arguments:
+            - "@app.repository.cpf_blacklist_event"

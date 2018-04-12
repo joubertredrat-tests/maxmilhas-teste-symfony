@@ -17,22 +17,22 @@ use Application\Domain\Model\CpfBlacklistInterface;
 interface CpfBlacklistRepositoryInterface
 {
     /**
-     * @param CpfBlacklistInterface $cpf
+     * @param CpfBlacklistInterface $cpfBlacklist
      * @return CpfBlacklistInterface
      */
-    public function add(CpfBlacklistInterface $cpf): CpfBlacklistInterface;
+    public function add(CpfBlacklistInterface $cpfBlacklist): CpfBlacklistInterface;
 
     /**
-     * @param CpfBlacklistInterface $cpf
+     * @param CpfBlacklistInterface $cpfBlacklist
      * @return CpfBlacklistInterface
      */
-    public function update(CpfBlacklistInterface $cpf): CpfBlacklistInterface;
+    public function update(CpfBlacklistInterface $cpfBlacklist): CpfBlacklistInterface;
 
     /**
-     * @param CpfBlacklistInterface $cpf
+     * @param CpfBlacklistInterface $cpfBlacklist
      * @return bool
      */
-    public function delete(CpfBlacklistInterface $cpf): bool;
+    public function delete(CpfBlacklistInterface $cpfBlacklist): bool;
 
     /**
      * @param int $id
@@ -45,4 +45,9 @@ interface CpfBlacklistRepositoryInterface
      * @return CpfBlacklistInterface|null
      */
     public function getByNumber(string $number): ?CpfBlacklistInterface;
+
+    /**
+     * @return array<CpfBlacklistInterface>
+     */
+    public function list(): array;
 }

@@ -19,16 +19,24 @@ class CpfBlacklistPresenter implements ApiPresenterInterface
     /**
      * @var CpfBlacklistInterface
      */
-    private $cpf;
+    private $cpfBlacklist;
 
     /**
      * Cpf Blacklist Presenter constructor
      *
-     * @param CpfBlacklistInterface $cpf
+     * @param CpfBlacklistInterface $cpfBlacklist
      */
-    public function __construct(CpfBlacklistInterface $cpf)
+    public function __construct(CpfBlacklistInterface $cpfBlacklist)
     {
-        $this->cpf = $cpf;
+        $this->cpfBlacklist = $cpfBlacklist;
+    }
+
+    /**
+     * @return CpfBlacklistInterface
+     */
+    public function getCpfBlacklist(): CpfBlacklistInterface
+    {
+        return $this->cpfBlacklist;
     }
 
     /**
@@ -36,19 +44,19 @@ class CpfBlacklistPresenter implements ApiPresenterInterface
      */
     public function toArray(): array
     {
-        $createdAt = $this->cpf->getCreatedAt() instanceof \DateTime ?
-            $this->cpf->getCreatedAt()->format('Y-m-d H:i:s') :
+        $createdAt = $this->cpfBlacklist->getCreatedAt() instanceof \DateTime ?
+            $this->cpfBlacklist->getCreatedAt()->format('Y-m-d H:i:s') :
             null
         ;
 
-        $updatedAt = $this->cpf->getUpdatedAt() instanceof \DateTime ?
-            $this->cpf->getUpdatedAt()->format('Y-m-d H:i:s') :
+        $updatedAt = $this->cpfBlacklist->getUpdatedAt() instanceof \DateTime ?
+            $this->cpfBlacklist->getUpdatedAt()->format('Y-m-d H:i:s') :
             null
         ;
 
         return [
-            'id' => $this->cpf->getId(),
-            'number' => $this->cpf->getNumber(),
+            'id' => $this->cpfBlacklist->getId(),
+            'number' => $this->cpfBlacklist->getNumber(),
             'createdAt' => $createdAt,
             'updatedAt' => $updatedAt,
         ];
