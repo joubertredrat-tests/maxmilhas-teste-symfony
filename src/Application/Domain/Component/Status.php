@@ -5,12 +5,12 @@
  * @author Joubert RedRat <me+github@redrat.com.br>
  */
 
-namespace AppBundle\Component;
+namespace Application\Domain\Component;
 
 /**
  * Status
  *
- * @package AppBundle\Component
+ * @package Application\Domain\Component
  */
 class Status
 {

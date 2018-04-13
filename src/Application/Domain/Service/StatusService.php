@@ -7,7 +7,7 @@
 
 namespace Application\Domain\Service;
 
-use AppBundle\Component\Status;
+use Application\Domain\Component\Status;
 
 /**
  * Status Service
