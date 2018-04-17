@@ -1,0 +1,12 @@
+services:
+    app.repository.cpf_blacklist:
+        class: AppBundle\Repository\CpfBlacklistRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Application\Domain\Model\CpfBlacklist
+
+    app.repository.cpf_blacklist_event:
+        class: AppBundle\Repository\CpfBlacklistEventRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Application\Domain\Model\CpfBlacklistEvent

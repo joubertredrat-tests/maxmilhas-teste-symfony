@@ -5,7 +5,8 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "Application\\": "src/Application"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
@@ -28,6 +29,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
+        "squizlabs/php_codesniffer": "*",
         "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
@@ -44,6 +46,9 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "psr2": [
+          "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib src/"
         ]
     },
     "config": {

@@ -1,0 +1,4 @@
+imports:
+    - { resource: 'services/application.yml' }
+    - { resource: 'services/component.yml' }
+    - { resource: 'services/repository.yml' }

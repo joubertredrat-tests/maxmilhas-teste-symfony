@@ -1,0 +1,59 @@
+api_status:
+    path: /api/v1/status
+    controller: AppBundle:Status:show
+    methods: [GET]
+
+api_status_alias:
+    path: /status
+    controller: AppBundle:Status:show
+    methods: [GET]
+
+api_cpf_events_list:
+    path: /api/v1/cpf/blacklist/events
+    controller: AppBundle:CpfBlacklistEvent:list
+    methods: [GET]
+
+api_cpf_consult:
+    path: /api/v1/cpf/blacklist/consulta
+    controller: AppBundle:CpfBlacklist:consult
+    methods: [GET]
+
+api_cpf_consult_alias:
+    path: /consulta
+    controller: AppBundle:CpfBlacklist:consult
+    methods: [GET]
+
+api_cpf_list:
+    path: /api/v1/cpf/blacklist
+    controller: AppBundle:CpfBlacklist:list
+    methods: [GET]
+
+api_cpf_get:
+    path: /api/v1/cpf/blacklist/{id}
+    controller: AppBundle:CpfBlacklist:get
+    methods: [GET]
+
+api_cpf_post:
+    path: /api/v1/cpf/blacklist
+    controller: AppBundle:CpfBlacklist:post
+    methods: [POST]
+
+api_cpf_delete:
+    path: /api/v1/cpf/blacklist/{id}
+    controller: AppBundle:CpfBlacklist:delete
+    methods: [DELETE]
+
+form_show:
+    path: /form
+    controller: AppBundle:Form:show
+    methods: [GET]
+
+docs_show:
+    path: /docs
+    controller: AppBundle:Docs:show
+    methods: [GET]
+
+index:
+    path: /
+    controller: AppBundle:Default:index
+    methods: [GET]

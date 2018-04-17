@@ -1,77 +1,43 @@
-Symfony Standard Edition
-========================
+# Teste MaxMilhas - Versão Symfony Framework
 
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
+Esta versão do teste foi programada usando o [Symfony Framework](https://symfony.com) versão 3.4.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+## Execução
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Para execução deste projeto, execute o comando abaixo.
 
-What's inside?
---------------
+    docker-compose up
 
-The Symfony Standard Edition is configured with the following defaults:
+Ao final do processo de instalação, o projeto estará disponível em `http://localhost:4000`.
 
-  * An AppBundle you can use to start coding;
+#### Endereços
 
-  * Twig as the only configured template engine;
+* Formulário: [http://localhost:4000/form](http://localhost:3000/form)
+* Documentação da API: [http://localhost:4000/docs](http://localhost:3000/docs)
+* Base da API: [http://localhost:4000/api/v1](http://localhost:3000/api/v1)
 
-  * Doctrine ORM/DBAL;
 
-  * Swiftmailer;
+## Informações
 
-  * Annotations enabled for everything.
+O projeto foi desenvolvido usando abordagem de programação agnóstica a frameworks e conceitos de [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design),
+recebendo o código da camada de negócio originalmente da versão Slim Framework, tendo sido necessário
+somente a adequação do framework ao código existente.
 
-It comes pre-configured with the following bundles:
+A camada de negócio está na pasta `src/Application`, sendo totalmente portável
+para qualquer outro framework ou sistema que utilize PHP 7.1 ou superior.
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+A camada de infraestrutura está na pasta `src/AppBundle`, sendo ela responsável por tratar a requisição,
+interação com a camada de negócio e retorno da requisição.
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+Todo código fonte de `src/Application` e `src/App` estão em conformidade com as [PSR-1](https://www.php-fig.org/psr/psr-1/) e [PSR-2](https://www.php-fig.org/psr/psr-2/)
+e estão documentados no padrão [PHPDoc](https://en.wikipedia.org/wiki/PHPDoc).
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+Todo código fonte de `src/Application` foram codificados considerando type hint e return type.
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Escolhi a versão 3.4 e não a 4.0 do framework pois estou mais familiarizado com ele, além de ser [LTS](https://en.wikipedia.org/wiki/Long-term_support).
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+## Todo
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
-
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+A validação de um CPF válido está na model `CpfBlacklist` e `CpfBlacklistEvent`, porém,
+seria interessante desacoplar, criar um [Value Object](https://en.wikipedia.org/wiki/Value_object) `Cpf` e atribuir a ele a responsabilidade
+por validar a string de CPF, tornando `CpfBlacklist`, `CpfBlacklistEvent` e outras implementações usuários de `Cpf` 

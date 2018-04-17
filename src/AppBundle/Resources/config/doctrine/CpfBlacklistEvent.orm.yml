@@ -1,0 +1,22 @@
+Application\Domain\Model\CpfBlacklistEvent:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CpfBlacklistEventRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: string
+            length: 11
+            nullable: true
+        type:
+            type: string
+            length: 20
+        createdAt:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [ forgeCreatedAt ]
