@@ -47,3 +47,13 @@ form_show:
     path: /form
     controller: AppBundle:Form:show
     methods: [GET]
+
+docs_show:
+    path: /docs
+    controller: AppBundle:Docs:show
+    methods: [GET]
+
+index:
+    path: /
+    controller: AppBundle:Default:index
+    methods: [GET]
