@@ -176,7 +176,6 @@ class CpfBlacklistController extends Controller
             $cpfBlacklistEventService = $this->get('app.service.cpf_blacklist_event');
 
             $cpfBlacklist = $cpfBlacklistService->deleteCpf($id);
-
             $cpfBlacklistEventService->registerEventDelete($cpfBlacklist);
 
             return new JsonResponse([], Response::HTTP_NO_CONTENT);

@@ -11,7 +11,7 @@
         </div>
         <div id="cpf-blacklist" style="display: none;">
             <p>CPF está BLOCK</p>
-            <input type="hidden" name="id" id="id" vaue="" />
+            <input type="hidden" name="id" id="id" value="" />
             <input type="button" name="remove" id="remove" value="Remover" />
         </div>
         <div id="cpf-free" style="display: none;">
@@ -144,7 +144,7 @@
 
                 request.open(
                     'POST',
-                    '{{ path('api_cpf_post') }}',
+                    '/api/v1/cpf/blacklist',
                     true
                 );
 
