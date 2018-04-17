@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+    maxmilhas-test-symfony-nginx:
+        build:
+            context: .
+            dockerfile: ./scripts/docker/nginx/Dockerfile
+        ports:
+            - 4000:4000
+        depends_on:
+            - maxmilhas-test-symfony-php-fpm
+    maxmilhas-test-symfony-php-fpm:
+        build:
+            context: .
+            dockerfile: ./scripts/docker/php-fpm/Dockerfile
